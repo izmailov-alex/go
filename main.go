@@ -8,11 +8,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type segment struct {
-	SegmentID   string `json:"segment_id"`
-	SegmentName string `json:"segment_name"`
-}
-
 func GinHandler(myhandler func(c *gin.Context) error) (ginhandler func(c *gin.Context)) {
 	return func(c *gin.Context) {
 		if err := myhandler(c); err != nil {
@@ -29,9 +24,16 @@ func init() {
 
 func main() {
 	router := gin.Default()
+
 	router.GET("/segments", GinHandler(controllers.GetSegments))
-	router.GET("/segments/:id", GinHandler(controllers.GetSegmentID))
+	router.GET("/segments/:segment_id", GinHandler(controllers.GetSegmentID))
+	router.GET("/user_segments/:user_id", GinHandler(controllers.GetUserSegment))
+
 	router.POST("/segments/:segment_name", GinHandler(controllers.PostSegments))
+
+	router.PUT("/user_segments/:user_id", GinHandler(controllers.PutUserSegments))
+
+	router.DELETE("/segments/:segment_name", GinHandler(controllers.DeleteSegment))
 
 	router.Run("localhost:8081")
 }

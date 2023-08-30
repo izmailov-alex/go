@@ -15,8 +15,10 @@ CREATE TABLE users (
 
 CREATE TABLE user_segments (
     user_id INT NOT NULL,
-    segment_id INT NOT NULL
-)
+    segment_id INT NOT NULL,
+    PRIMARY KEY (`user_id`,`segment_id`)
+);
+
 INSERT INTO users
 
 VALUES
