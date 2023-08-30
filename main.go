@@ -31,7 +31,7 @@ func main() {
 	router := gin.Default()
 	router.GET("/segments", GinHandler(controllers.GetSegments))
 	router.GET("/segments/:id", GinHandler(controllers.GetSegmentID))
-	router.POST("/segments", GinHandler(controllers.PostSegments))
+	router.POST("/segments/:segment_name", GinHandler(controllers.PostSegments))
 
-	router.Run("localhost:8080")
+	router.Run("localhost:8081")
 }
