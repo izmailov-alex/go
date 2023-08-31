@@ -9,8 +9,9 @@ CREATE TABLE segments (
 );
 
 CREATE TABLE users (
-    user_id INT AUTO_INCREMENT NOT NULL,
-    PRIMARY KEY (`user_id`)
+    user_id INT NOT NULL,
+    PRIMARY KEY (`user_id`),
+    UNIQUE (`user_id`)
 );
 
 CREATE TABLE user_segments (
@@ -18,19 +19,3 @@ CREATE TABLE user_segments (
     segment_id INT NOT NULL,
     PRIMARY KEY (`user_id`,`segment_id`)
 );
-
-INSERT INTO users
-
-VALUES
-    (),
-    (),
-    (),
-    ();
-
-INSERT INTO segments
-  (segment_name)
-VALUES
-  ('AVITO_VOICE_MESSAGES'),
-  ('AVITO_PERFORMANCE_VAS'),
-  ('AVITO_DISCOUNT_30'),
-  ('AVITO_DISCOUNT_50');

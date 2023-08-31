@@ -8,27 +8,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetTables(c *gin.Context) error {
-	var tables []string
-	rows, err := initializers.DB.Query("SHOW tables")
-	if err != nil {
-		return err
-	}
-	defer rows.Close()
-	for rows.Next() {
-		var name string
-		if err := rows.Scan(&name); err != nil {
-			return err
-		}
-		tables = append(tables, name)
-	}
-	if err := rows.Err(); err != nil {
-		return err
-	}
-	c.IndentedJSON(http.StatusOK, tables)
-	return err
-}
-
 func GetSegments(c *gin.Context) error {
 	var segments []models.Segment
 	rows, err := initializers.DB.Query("SELECT * FROM segments")

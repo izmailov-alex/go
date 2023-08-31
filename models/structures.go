@@ -1,5 +1,7 @@
 package models
 
+//Data structures for query processing
+
 type Segment struct {
 	SegmentID   string `json:"segment_id"`
 	SegmentName string `json:"segment_name"`

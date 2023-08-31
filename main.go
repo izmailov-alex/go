@@ -4,10 +4,12 @@ import (
 	"example/web-service-avito/controllers"
 	"example/web-service-avito/initializers"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
 
+// Generic Error Handler
 func GinHandler(myhandler func(c *gin.Context) error) (ginhandler func(c *gin.Context)) {
 	return func(c *gin.Context) {
 		if err := myhandler(c); err != nil {
@@ -28,7 +30,6 @@ func main() {
 	router.GET("/segments", GinHandler(controllers.GetSegments))
 	router.GET("/segments/:segment_id", GinHandler(controllers.GetSegmentID))
 	router.GET("/user_segments/:user_id", GinHandler(controllers.GetUserSegment))
-	router.GET("/tables", GinHandler(controllers.GetTables))
 
 	router.POST("/segments/:segment_name", GinHandler(controllers.PostSegments))
 	router.POST("/users/:user_id", GinHandler(controllers.PostUsers))
@@ -37,5 +38,6 @@ func main() {
 
 	router.DELETE("/segments/:segment_name", GinHandler(controllers.DeleteSegment))
 
-	router.Run("0.0.0.0:8081")
+	PORT := os.Getenv("SERVER_PORT")
+	router.Run("0.0.0.0:" + PORT)
 }
