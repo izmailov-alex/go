@@ -28,12 +28,14 @@ func main() {
 	router.GET("/segments", GinHandler(controllers.GetSegments))
 	router.GET("/segments/:segment_id", GinHandler(controllers.GetSegmentID))
 	router.GET("/user_segments/:user_id", GinHandler(controllers.GetUserSegment))
+	router.GET("/tables", GinHandler(controllers.GetTables))
 
 	router.POST("/segments/:segment_name", GinHandler(controllers.PostSegments))
+	router.POST("/users/:user_id", GinHandler(controllers.PostUsers))
 
 	router.PUT("/user_segments/:user_id", GinHandler(controllers.PutUserSegments))
 
 	router.DELETE("/segments/:segment_name", GinHandler(controllers.DeleteSegment))
 
-	router.Run("localhost:8081")
+	router.Run("0.0.0.0:8081")
 }

@@ -9,7 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// postAlbums adds an album from JSON received in the request body.
+// postSegments adds an segment from JSON received in the request header.
 func PostSegments(c *gin.Context) error {
 	var newSegment models.Segment
 	name := c.Param("segment_name")
@@ -24,5 +24,17 @@ func PostSegments(c *gin.Context) error {
 	newSegment.SegmentID = strconv.FormatInt(id, 10)
 	newSegment.SegmentName = name
 	c.IndentedJSON(http.StatusCreated, newSegment)
+	return nil
+}
+
+func PostUsers(c *gin.Context) error {
+	var newUsers models.User
+	userID := c.Param("user_id")
+	_, err := initializers.DB.Exec("INSERT INTO users (user_id) VALUES (?)", userID)
+	if err != nil {
+		return err
+	}
+	newUsers.UserID = userID
+	c.IndentedJSON(http.StatusCreated, newUsers)
 	return nil
 }

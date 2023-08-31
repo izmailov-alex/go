@@ -14,3 +14,6 @@ type Put struct {
 	SegmentAdd    []string `json:"segment_add"`
 	SegmentDelete []string `json:"segment_delete"`
 }
+type User struct {
+	UserID string `json:"user_id"`
+}
